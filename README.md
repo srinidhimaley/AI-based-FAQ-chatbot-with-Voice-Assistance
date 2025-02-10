@@ -24,7 +24,7 @@ The AI-Based FAQ Chatbot with Voice Assistance is designed to provide automated 
 Programming Language: Python
 
 # Installation
-# Prerequisites
+Prerequisites
 Ensure you have the following installed:
 - Python (>= 3.8)
 - pip (Python package manager)
