@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>AI Based FAQ Chatbot with Text Assistance</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+<script>
+function displayFullName() { // Defines a function that is triggered when a user submits a question
+    var request = new XMLHttpRequest();
+	var input = document.getElementById("t2").value; // Gets the user's question from a text input field with id="t2"
+	var mydata = ""
+	mydata = mydata + document.getElementById("t1").value+"\n"
+	mydata = mydata + "You: "+input+"\n"
+	request.open("GET", "http://127.0.0.1:8000/ChatData?mytext="+input);
+	request.onreadystatechange = function() { // Checks if the request has completed (readyState 4) and was successful (status 200)
+    if(this.readyState === 4 && this.status === 200) {
+	   var output = this.responseText; // Stores the server response in output, then clears the input box t2
+	   document.getElementById("t2").value = "";
+	   if (output === "unable to recognize") 	{
+	   	     mydata = mydata + output
+		     document.getElementById("t1").innerHTML = mydata;
+			 document.getElementById("t2").innerHTML = "";
+		} else {
+		     const arr = output.split("#"); // Splits the response using # to separate the bot reply and the recommended question
+		     mydata = mydata + arr[0]+"\n"
+		     document.getElementById("t1").innerHTML = mydata;
+			 document.getElementById("recommend1").innerHTML = "";
+			 document.getElementById("recommend1").innerHTML = "Recommended Question : "+arr[1];
+			 document.getElementById("t2").innerHTML = "";
+		}
+        }
+    };
+	request.send();
+}
+</script>
+</head>
+<head>
+    <meta charset="UTF-8">
+    <title>AI Based FAQ Chatbot with Voice Assistance</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', sans-serif;
+            background-color: #f5f5f5;
+        }
+        #wrapper {
+            width: 890px;
+            margin: auto;
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+        #header {
+            text-align: center;
+            padding: 10px;
+        }
+        #logo {
+            font-size: 20px;
+            color: black;
+            background-color: black;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #menu {
+            text-align: center;
+            margin-top: 10px 0;
+        }
+        #menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #menu li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        #menu a {
+            text-decoration: none;
+            color: black;
+            padding: 10px 0px;
+        }
+        #splash img {
+            width: 70%;
+            max-width: 870px;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+        }
+        .highlight-text {
+            color: red;
+            text-align: center;
+        }
+        .section-title {
+            text-align: center;
+            color: black;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        textarea, input[type="text"] {
+            width: 90%;
+            margin: 10px auto;
+            display: block;
+            padding: 10px;
+            font-size: 14px;
+        }
+        button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 10px;
+            font-size: 16px;
+            background-color: #008cba;
+            color: white;
+            border: none;
+            border-radius: 1px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005f5f;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <header>
+            <!--<div id="logo">
+                AI Based FAQ Chatbot with Voice Assistance
+            </div>-->
+        </header>
+
+        <nav id="menu">
+            <ul>
+                <li><a href="{% url 'Chatbot' %}">Interact with Voice Based Chatbot</a></li>
+                <li><a href="{% url 'TextChatbot' %}">Text Based Chatbot</a></li>
+                <li><a href="{% url 'index' %}">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- <section id="splash">
+            <img src="{% static 'images/investor.jpg' %}" alt="Splash Image">
+        </section> -->
+
+        <div class="highlight-text">{{ data|safe }}</div>
+
+        <div class="section-title">Chat with ChatBot</div>
+
+        <section id="recommend">
+            <textarea name="recommend1" id="recommend1" rows="3" placeholder="Enter recommendation..."></textarea>
+        </section>
+
+        <section id="result">
+            <textarea name="t1" id="t1" rows="20" placeholder="ChatBot responses will appear here..."></textarea>
+        </section>
+
+        <input type="text" name="t2" id="t2" placeholder="Enter your question..." />
+        <button type="button" onclick="displayFullName()">Click Here to Submit </button>
+    </div>
+</body>
+</html>

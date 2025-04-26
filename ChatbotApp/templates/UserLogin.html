@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>AI Based FAQ Chatbot with Voice Assistance</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+<script language="javascript">
+	function validate(formObj)
+	{
+	if(formObj.t1.value.length==0)
+	{
+	alert("Please Enter User ID");
+	formObj.t1.focus();
+	return false;
+	}
+	if(formObj.t2.value.length==0)
+	{
+	alert("Please Enter Password");
+	formObj.t2.focus();
+	return false;
+	}
+	return true;
+	}
+	</script>
+</head>
+<style>
+	body {
+		font-family: 'Times New Roman', cursive, sans-serif;
+		background-color: #f5f5f5;
+		margin: 0;
+		padding: 0;
+	}
+
+	#wrapper {
+		width: 890px;
+		margin: 0 auto;
+		background-color: #fff;
+		border: 1px solid #ccc;
+	}
+
+	#header {
+		background-color: #333;
+		color: yellow;
+		text-align: center;
+		padding: 20px;
+		font-size: 22px;
+		font-weight: bold;
+	}
+
+	#menu {
+		background-color: #444;
+		text-align: center;
+		padding: 10px 0;
+	}
+
+	#menu ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	#menu ul li {
+		display: inline-block;
+		margin: 0 15px;
+	}
+
+	#menu ul li a {
+		color: black;
+		text-decoration: none;
+		font-weight: bold;
+		font-size: 18px;
+	}
+
+	#splash {
+		text-align: justify;
+		margin-top: 22px;
+	}
+
+	.form-container {
+		text-align: center;
+		padding: 20px;
+	}
+
+	.form-container h5 {
+		font-size: 15px;
+		margin-bottom: 15px;
+	}
+
+	.form-message {
+		color: red;
+		margin-bottom: 15px;
+	}
+
+	table {
+		margin: 0 auto;
+	}
+
+	table td {
+		padding: 10px;
+	}
+
+	input[type="text"],
+	input[type="password"] {
+		width: 220px;
+		padding: 2px;
+		font-size: 10px;
+	}
+
+	input[type="submit"] {
+		padding: 8px 8px;
+		font-size: 13px;
+		color: black;
+		border: none;
+		cursor: pointer;
+	}
+</style>
+</head>
+<body>
+<div id="wrapper">
+<div id="header">
+	AI Based FAQ Chatbot with Voice Assistance
+</div>
+
+<div id="menu">
+	<ul>
+		<li><a href="{% url 'index' %}">Home</a></li>
+		<li><a href="{% url 'AdminLogin' %}">Admin Login Here</a></li>
+		<li><a href="{% url 'UserLogin' %}">User Login Here</a></li>
+		<li><a href="{% url 'Signup' %}">New User Signup Here</a></li>
+	</ul>
+</div>
+
+<div id="splash">
+	<img class="pic" src="{% static 'images/investor.jpg' %}" width="790" height="230" alt="Banner Image" />
+</div>
+
+<div class="form-container">
+	<form name="f1" method="post" action="{% url 'UserLoginAction' %}" onsubmit="return validate(this);">
+		{% csrf_token %}
+		<h5>User Login Screen</h5>
+		<div class="form-message">{{ data|safe }}</div>
+
+		<table>
+			<tr>
+				<td><label for="username">Username</label></td>
+				<td><input type="text" name="t1" id="username" required></td>
+			</tr>
+			<tr>
+				<td><label for="password">Password</label></td>
+				<td><input type="password" name="t2" id="password" required></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Login"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+</div>
+</body>
+</html>

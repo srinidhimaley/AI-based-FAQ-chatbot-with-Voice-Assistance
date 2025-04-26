@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>AI Based FAQ Chatbot with Voice Assistance</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+<style>
+	body {
+		font-family: 'Times New Roman', sans-serif;
+		background-color: #f5f5f5;
+		margin: 0;
+		padding: 0;
+	}
+
+	#wrapper {
+		width: 890px;
+		margin: 0 auto;
+		background-color: #fff;
+		border: 1px solid #ddd;
+	}
+
+	#header {
+		background-color: #333;
+		color: yellow;
+		padding: 20px;
+		text-align: center;
+		font-size: 22px;
+		font-weight: bold;
+	}
+
+	#menu {
+		background-color: #444;
+		text-align: center;
+		padding: 10px 0;
+	}
+
+	#menu ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	#menu ul li {
+		display: inline-block;
+		margin: 0 15px;
+	}
+
+	#menu ul li a {
+		color: black;
+		text-decoration: none;
+		font-weight: bold;
+		font-size: 18px;
+	}
+
+	#splash {
+		text-align: justify;
+		margin-top: 22px;
+	}
+
+	.message {
+		text-align: center;
+		color: black;
+		font-size: 16px;
+		margin: 10px;
+	}
+</style>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="header">
+			AI Based FAQ Chatbot with Voice Assistance
+		</div>
+	
+		<div id="menu">
+			<ul>
+				<li><a href="{% url 'AddQuestion' %}">Add Frequently Asked Questions</a></li>
+				<li><a href="{% url 'ViewUser' %}">View Users List</a></li>
+				<li><a href="{% url 'index' %}">Logout</a></li>
+			</ul>
+		</div>
+	
+		<div id="splash">
+			<img class="pic" src="{% static 'images/investor.jpg' %}" width="790" height="230" alt="Splash Image" />
+		</div>
+	
+		<div class="message">
+			{{ data|safe }}
+		</div>
+	</div>
+	</body>
+</html>

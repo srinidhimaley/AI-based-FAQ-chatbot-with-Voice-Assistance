@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>AI Based FAQ Chatbot with Voice Assistance</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+<script language="javascript">
+	function validate(formObj)
+	{
+	if(formObj.t1.value.length==0)
+	{
+	alert("Please Enter Question");
+	formObj.t1.focus();
+	return false;
+	}
+	if(formObj.t2.value.length==0)
+	{
+	alert("Please Enter Answer");
+	formObj.t2.focus();
+	return false;
+	}	
+	return true;
+	}
+	</script>
+	 <style>
+		.headline {
+		  text-align: center;
+		  font-size: 22px;
+		  color: yellow;
+		}
+		#menu {
+    text-align: center;
+    margin-top: 0px;
+  }
+
+  #menu ul {
+    list-style: none;
+    padding: 0;
+    display: inline-block;
+  }
+
+  #menu li {
+    display: inline;
+    margin: 0 10px;
+  }
+
+  #menu a {
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  #menu a:hover {
+    text-decoration: underline;
+  }
+  .form-container {
+    text-align: center;
+    margin-top: 30px;
+    font-family: 'Times New Roman', cursive;
+  }
+
+  .form-container h5 {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .form-container .message {
+    color: red;
+    margin-bottom: 15px;
+  }
+
+  .form-table {
+    margin: 0 auto;
+  }
+
+  .form-table td {
+    padding: 8px 10px;
+    color: black;
+    font-weight: bold;
+  }
+
+  input[type="text"] {
+    width: 250px;
+    padding: 1px;
+    font-family: 'Times New Roman', cursive;
+  }
+
+  input[type="submit"] {
+    padding: 8px 10px;
+    margin-top: 10px;
+    font-size: 10px;
+    cursor: pointer;
+  }
+	  </style>
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<div class="headline">AI Based FAQ Chatbot with Voice Assistance</div>
+		<div id="slogan">
+			
+		</div>
+	</div>
+	<div id="menu">
+		<ul>
+		  <li class="first current_page_item"><a href="{% url 'AddQuestion' %}">Add Frequently Asked Questions</a></li>
+		  <li class="first current_page_item"><a href="{% url 'ViewUser' %}">View Users List</a></li>
+		  <li class="first current_page_item"><a href="{% url 'index' %}">Logout</a></li>
+		</ul>
+		<br class="clearfix" />
+	  </div>
+			
+	<div id="splash">
+		<img class="pic" src="{% static 'images/investor.jpg' %}" width="870" height="230" alt="" />
+	</div>	
+	<div class="form-container">
+		<form name="f1" method="post" action="{% url 'AddQuestionAction' %}" onsubmit="return validate(this);">
+		  {% csrf_token %}
+		  
+		  <h5>Add Frequently Asked Question Screen</h5>
+		  
+		  <div class="message">{{ data|safe }}</div>
+		  
+		  <table class="form-table">
+			<tr>
+			  <td>Question</td>
+			  <td><input type="text" name="t1" /></td>
+			</tr>
+			<tr>
+			  <td>Answer</td>
+			  <td><input type="text" name="t2" /></td>
+			</tr>
+			<tr>
+			  <td></td>
+			  <td><input type="submit" value="Submit" /></td>
+			</tr>
+		  </table>
+		</form>
+	  </div>
+				<br/><br/>
+	</body>
+</html>

@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>AI Based FAQ Chatbot with Voice Assistance</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+<script language="javascript">
+	function validate(formObj)
+	{
+	if(formObj.t1.value.length==0)
+	{
+	alert("Please Enter User ID");
+	formObj.t1.focus();
+	return false;
+	}
+	if(formObj.t2.value.length==0)
+	{
+	alert("Please Enter Password");
+	formObj.t2.focus();
+	return false;
+	}
+	if(formObj.t3.value.length==0)
+	{
+	alert("Please Enter Contact No");
+	formObj.t3.focus();
+	return false;
+	}
+	if(isNaN(formObj.t3.value)){
+		window.alert("Please enter valid contact number");
+		formObj.t3.focus();
+		return false;
+	}
+	if(formObj.t4.value.length==0)
+	{
+	alert("Please Enter Email ID");
+	formObj.t4.focus();
+	return false;
+	}
+	var filter = /^([a-zA-Z0-9_\.\-])+\@(gmail+\.)+(com)+$/;
+	if (!filter.test(formObj.t4.value)) {
+		window.alert('enter a valid email address');
+		formObj.t4.focus();
+		return false;
+	}
+	if(formObj.t5.value.length==0)
+	{
+	alert("Please Enter Address");
+	formObj.t5.focus();
+	return false;
+	}
+	return true;
+	}
+	</script>
+	 <style>
+        body {
+            font-family: 'Times New Roman', cursive, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrapper {
+            width: 890px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+
+        #header {
+            background-color: #333;
+            color: yellow;
+            padding: 20px;
+            text-align: center;
+            font-size: 22px;
+			font-weight: bold;
+        }
+
+        #menu {
+            background-color: #444;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        #menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #menu ul li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+        #menu ul li a {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+			font-size: 18px;
+        }
+
+        #splash {
+            text-align: justify;
+            margin: 22px;
+        }
+
+        .form-container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .form-container h5 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .form-message {
+            color: red;
+            margin-bottom: 15px;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        table td {
+            padding: 10px;
+        }
+
+        table input[type="text"],
+        table input[type="password"] {
+            width: 200px;
+            padding: 1px;
+            font-family: 'Times New Roman', cursive;
+        }
+
+        table input[type="submit"] {
+            padding: 6px 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="header">
+			AI Based FAQ Chatbot with Voice Assistance
+		</div>
+	
+		<div id="menu">
+			<ul>
+				<li><a href="{% url 'index' %}">Home</a></li>
+				<li><a href="{% url 'AdminLogin' %}">Admin Login Here</a></li>
+				<li><a href="{% url 'UserLogin' %}">User Login Here</a></li>
+				<li><a href="{% url 'Signup' %}">New User Signup Here</a></li>
+			</ul>
+		</div>
+	
+		<div id="splash">
+			<img src="{% static 'images/investor.jpg' %}" width="790" height="230" alt="Investor Banner">
+		</div>
+	
+		<div class="form-container">
+			<form name="f1" method="post" action="{% url 'SignupAction' %}" onsubmit="return validate(this);">
+				{% csrf_token %}
+				<h5>New User Signup Screen</h5>
+				<div class="form-message">{{ data|safe }}</div>
+	
+				<table>
+					<tr>
+						<td><label for="username">Username</label></td>
+						<td><input type="text" name="t1" id="username" required></td>
+					</tr>
+					<tr>
+						<td><label for="password">Password</label></td>
+						<td><input type="password" name="t2" id="password" required></td>
+					</tr>
+					<tr>
+						<td><label for="contact">Contact No</label></td>
+						<td><input type="text" name="t3" id="contact" required></td>
+					</tr>
+					<tr>
+						<td><label for="email">Email ID</label></td>
+						<td><input type="text" name="t4" id="email" required></td>
+					</tr>
+					<tr>
+						<td><label for="address">Address</label></td>
+						<td><input type="text" name="t5" id="address" required></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Submit"></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	</body>
+</html>
